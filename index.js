@@ -84,10 +84,23 @@ const askQuestions = () => {
             }
         },
         {
+            type: 'confirm',
+            name: 'licenseConfirm',
+            message: "Does this project have a license? (required)"
+        },
+        {
             type: 'list',
             name: 'license',
             message: 'Please select a license',
-            choices: ["MIT", "Stanford", "Yaya"]
+            when: ({licenseConfirm}) => {
+                if(licenseConfirm) {
+                    return true
+                }
+                else {
+                    return false
+                }
+            },
+            choices: ["MIT", "IBM", "Apache", "Mozilla"]
         },
         {
             type: 'input',
