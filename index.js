@@ -119,8 +119,14 @@ const askQuestions = () => {
 }
 
 askQuestions()
-    .then(data => {
-        console.log(data)
+    .then(userData => {
+        console.log(userData)
+        const pageHTML = generateMarkdown(userData)
+        fs.writeFile('./dist/README.md', pageHTML, err => {
+            if(err) throw new Error(err)
+            console.log("Page created!")
+        })
+
     })
 
 // TODO: Create a function to write README file
