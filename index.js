@@ -92,6 +92,7 @@ const askQuestions = () => {
             type: 'list',
             name: 'license',
             message: 'Please select a license',
+            // If licenseConfirm is true/false, do this
             when: ({licenseConfirm}) => {
                 if(licenseConfirm) {
                     return true
@@ -134,19 +135,15 @@ const askQuestions = () => {
 askQuestions()
     .then(userData => {
         console.log(userData)
+        // Store the contents of the markdown into pageHTML
         const pageHTML = generateMarkdown(userData)
+        // Write a README file using the content from pageHTML
         fs.writeFile('./dist/README.md', pageHTML, err => {
+            // If failure, throw error
             if(err) throw new Error(err)
+            // Alert that the page has been successfully created
             console.log("Page created!")
         })
 
     })
 
-// TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
-
-// TODO: Create a function to initialize app
-function init() {}
-
-// Function call to initialize app
-init();
